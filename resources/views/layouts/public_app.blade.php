@@ -115,7 +115,7 @@
                         <a href="#faculty" class="text-off-white hover:text-golden-orange px-3 py-2 rounded-md text-sm font-medium transition-colors">Dosen</a>
                         <a href="#publications" class="text-off-white hover:text-golden-orange px-3 py-2 rounded-md text-sm font-medium transition-colors">Publikasi</a>
                         <a href="#contact" class="text-off-white hover:text-golden-orange px-3 py-2 rounded-md text-sm font-medium transition-colors">Kontak</a>
-                        <a href="{{route('beranda')}}" class="bg-golden-orange text-dark-charcoal px-4 py-2 rounded-lg text-sm font-semibold hover:bg-golden-orange/90 transition-all hover-lift">
+                        <a href="#" class="bg-golden-orange text-dark-charcoal px-4 py-2 rounded-lg text-sm font-semibold hover:bg-golden-orange/90 transition-all hover-lift">
                             Sign In
                         </a>
                     </div>
@@ -156,7 +156,7 @@
                 
                 <!-- Mobile Sign In Button -->
                 <div class="pt-6">
-                    <a href={{route('beranda')}} class="w-full bg-golden-orange text-dark-charcoal py-3 px-6 rounded-lg text-lg font-semibold hover:bg-golden-orange/90 transition-all">
+                    <a href="#" class="w-full bg-golden-orange text-dark-charcoal py-3 px-6 rounded-lg text-lg font-semibold hover:bg-golden-orange/90 transition-all">
                         <i class="fas fa-sign-in-alt mr-2"></i>Sign In
                     </a>
                 </div>

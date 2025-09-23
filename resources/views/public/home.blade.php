@@ -1,4 +1,4 @@
-@extends('layouts.public-app')
+@extends('layouts.public_app')
 @section('content')
     <section id="home" class="hero-bg h-screen flex items-center justify-center relative">
         <div class="absolute inset-0 bg-dark-charcoal/70"></div>
