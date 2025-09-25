@@ -12,7 +12,7 @@
                 <br>
                 <span class="text-golden-orange">Inovasi • Kolaborasi • Transformasi Digital</span>
             </p>
-            <div class="space-x-4">
+            <div class="space-x-4 space-y-2 md:space-y-0 flex flex-col md:flex-row justify-center gap-4">
                 <button class="bg-golden-orange text-dark-charcoal px-8 py-3 rounded-lg text-lg font-semibold hover:bg-golden-orange/90 transition-all hover-lift">
                     Jelajahi Penelitian
                 </button>

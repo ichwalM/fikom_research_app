@@ -17,11 +17,11 @@
                     <div class="mb-4">
                         <a href="{{ route('admin.users.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
                             Tambah Pengguna
+                            <a href="{{ route('admin.users.trash') }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border ... ... hover:bg-yellow-600">
+                                Tong Sampah ({{ \App\Models\User::onlyTrashed()->count() }})
+                            </a>
                         </a>
                     </div>
-                    <a href="{{ route('admin.users.trash') }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border ... text-white ... hover:bg-yellow-600">
-                        Tong Sampah ({{ \App\Models\User::onlyTrashed()->count() }})
-                    </a>
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
@@ -53,6 +53,13 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href={{ route('admin.users.edit', $user) }} class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <form class="inline-block" action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900 ms-2">
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

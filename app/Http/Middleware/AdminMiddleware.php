@@ -16,10 +16,17 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role->name == 'Admin Fakultas') {
+        // Ini adalah satu-satunya blok pengecekan yang kita butuhkan.
+        // Pengecekan dilakukan secara berurutan:
+        // 1. Apakah user sudah login?
+        // 2. Apakah relasi 'role' ada (tidak null)?
+        // 3. Apakah nama role-nya 'Admin Fakultas'?
+        if (Auth::check() && Auth::user()->role && Auth::user()->role->name == 'Admin Fakultas') {
+            // Jika semua kondisi terpenuhi, izinkan akses.
             return $next($request);
         }
 
-        return redirect('/dashboard')->with('error', 'You do not have admin access.');
+        // Jika salah satu kondisi gagal, alihkan ke dashboard dengan pesan error.
+        return redirect('/dashboard')->with('error', 'Anda tidak memiliki hak akses Admin.');
     }
 }

@@ -1,0 +1,78 @@
+.login-bg {
+    background-image: url('../images/hero1.JPG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.glass-morphism {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(33, 33, 33, 0.85);
+    border: 1px solid rgba(224, 224, 224, 0.1);
+}
+
+.input-focus {
+    transition: all 0.3s ease;
+}
+
+.input-focus:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(243, 156, 18, 0.2);
+}
+
+.login-animation {
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.floating-animation {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 0 20px rgba(243, 156, 18, 0.3);
+    }
+    to {
+        box-shadow: 0 0 30px rgba(243, 156, 18, 0.6);
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F39C12;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e67e22;
+}

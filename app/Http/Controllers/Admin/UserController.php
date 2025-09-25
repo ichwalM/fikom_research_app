@@ -18,17 +18,17 @@ class UserController extends Controller
         return view('admin.users.trash', compact('users'));
     }
 
-    public function restore($id)
+    public function restore(User $user)
     {
-        $user = User::onlyTrashed()->findOrFail($id);
+        $user = User::onlyTrashed()->findOrFail($user->id);
         $user->restore();
 
         return redirect()->route('admin.users.trash')->with('success', 'Pengguna berhasil dikembalikan.');
     }
-    public function forceDelete($id)
+    public function forceDelete(User $user)
     {
 
-        $user = User::onlyTrashed()->findOrFail($id);
+        $user = User::onlyTrashed()->findOrFail($user->id);
         $user->forceDelete();
 
         return redirect()->route('admin.users.trash')->with('success', 'Pengguna berhasil dihapus permanen.');
@@ -103,5 +103,8 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
 
-    public function destroy(string $id) {}
+    public function destroy(User $user) {
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus.');
+    }
 }
