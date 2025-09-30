@@ -62,6 +62,13 @@
                             <i class="fas fa-eye" id="eyeIcon"></i>
                         </button>
                     </div>
+                    @if ($errors->has('email') || $errors->has('password'))
+                        <div class="mt-2 text-sm text-red-500">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Remember Me & Forgot Password -->
@@ -90,18 +97,18 @@
                     <i class="fas fa-sign-in-alt mr-2"></i>Masuk
                 </button>
                 <!-- Additional Info -->
-        <div class="mt-8 text-center login-animation">
-            <div class="bg-golden-orange/10 border border-golden-orange/30 rounded-lg p-4">
-                <div class="flex items-center justify-center mb-2">
-                    <i class="fas fa-info-circle text-golden-orange mr-2"></i>
-                    <span class="text-sm font-medium text-golden-orange">Informasi</span>
+                <div class="mt-8 text-center login-animation">
+                    <div class="bg-golden-orange/10 border border-golden-orange/30 rounded-lg p-4">
+                        <div class="flex items-center justify-center mb-2">
+                            <i class="fas fa-info-circle text-golden-orange mr-2"></i>
+                            <span class="text-sm font-medium text-golden-orange">Informasi</span>
+                        </div>
+                        <p class="text-xs text-off-white/70">
+                            Akses terbatas hanya untuk civitas akademika Fakultas Ilmu Komputer. 
+                            Hubungi administrator jika mengalami kendala.
+                        </p>
+                    </div>
                 </div>
-                <p class="text-xs text-off-white/70">
-                    Akses terbatas hanya untuk civitas akademika Fakultas Ilmu Komputer. 
-                    Hubungi administrator jika mengalami kendala.
-                </p>
-            </div>
-        </div>
 
                 <!-- Divider -->
                 <div class="relative my-6">

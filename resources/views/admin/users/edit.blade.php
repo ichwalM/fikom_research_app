@@ -1,4 +1,8 @@
-<x-app-layout>
+@extends('layouts.private_app')
+@section('header')
+    Edit Pengguna
+@endsection
+@section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit Pengguna: ') }} {{ $user->name }}
@@ -52,4 +56,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

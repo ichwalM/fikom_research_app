@@ -1,0 +1,24 @@
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+/* Utility tambahan agar tombol menu bisa menampung ripple */
+.menu-button {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Custom Scrollbar untuk Sidebar */
+.custom-scroll::-webkit-scrollbar { width: 6px; }
+.custom-scroll::-webkit-scrollbar-track { background: #333333; }
+.custom-scroll::-webkit-scrollbar-thumb { background: #555555; border-radius: 3px; }
+.custom-scroll::-webkit-scrollbar-thumb:hover { background: #777777; }

@@ -12,42 +12,34 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function trash()
-    {
+    public function trash(){
         $users = User::onlyTrashed()->get();
         return view('admin.users.trash', compact('users'));
     }
 
-    public function restore(User $user)
-    {
+    public function restore(User $user){
         $user = User::onlyTrashed()->findOrFail($user->id);
         $user->restore();
 
         return redirect()->route('admin.users.trash')->with('success', 'Pengguna berhasil dikembalikan.');
     }
-    public function forceDelete(User $user)
-    {
-
+    public function forceDelete(User $user){
         $user = User::onlyTrashed()->findOrFail($user->id);
         $user->forceDelete();
-
         return redirect()->route('admin.users.trash')->with('success', 'Pengguna berhasil dihapus permanen.');
     }
-    public function index()
-    {
-        $users = User::with('role')->get();
 
+    public function index(){
+        $users = User::with('role')->get();
         return view('admin.users.index', compact('users'));
     }
 
-    public function create()
-    {
+    public function create(){
         $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],

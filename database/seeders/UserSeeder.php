@@ -19,12 +19,12 @@ class UserSeeder extends Seeder
         $adminRole = Role::where('name', 'Admin Fakultas')->first();
 
         // 2. Buat user admin baru
-        // User::create([
-        //     'name' => 'Admin Fikom',
-        //     'email' => 'admin@fikom.app',
-        //     'password' => Hash::make('password'), // Ganti dengan password yang aman
-        //     'role_id' => $adminRole->id,
-        // ]);
+        User::create([
+            'name' => 'Admin Fikom',
+            'email' => 'admin@fikom.app',
+            'password' => Hash::make('password'), // Ganti dengan password yang aman
+            'role_id' => $adminRole->id,
+        ]);
         User::create([
             'name' => 'dosen1',
             'email' => 'dosen@fikom.app',

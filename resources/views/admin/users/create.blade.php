@@ -1,54 +1,57 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tambah Pengguna Baru') }}
-        </h2>
-    </x-slot>
+@extends('layouts.private_app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    
-                    <form method="POST" action="{{ route('admin.users.store') }}">
-                        @csrf
+@section('title', 'Tambah Pengguna Baru')
 
-                        <div>
-                            <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
+@section('header')
+    Tambah Pengguna Baru
+@endsection
 
-                        <div class="mt-4">
-                            <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
+@section('content')
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <form method="POST" action="{{ route('admin.users.store') }}">
+            @csrf
 
-                        <div class="mt-4">
-                            <x-input-label for="password" :value="__('Password')" />
-                            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
-
-                        <div class="mt-4">
-                            <x-input-label for="role_id" :value="__('Role')" />
-                            <select name="role_id" id="role_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
-                                {{ __('Simpan') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
-
-                </div>
+            <div>
+                <label for="name" class="block font-medium text-sm text-gray-700">Nama</label>
+                <input id="name" name="name" type="text" value="{{ old('name') }}" required autofocus
+                       class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                @error('name')
+                    <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
             </div>
-        </div>
+
+            <div class="mt-4">
+                <label for="email" class="block font-medium text-sm text-gray-700">Email</label>
+                <input id="email" name="email" type="email" value="{{ old('email') }}" required
+                       class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                @error('email')
+                    <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mt-4">
+                <label for="password" class="block font-medium text-sm text-gray-700">Password</label>
+                <input id="password" name="password" type="password" required
+                       class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                @error('password')
+                    <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mt-4">
+                <label for="role_id" class="block font-medium text-sm text-gray-700">Role</label>
+                <select name="role_id" id="role_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
+                    Simpan
+                </button>
+            </div>
+        </form>
     </div>
-</x-app-layout>
+@endsection

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\public\BlogsController;
+use App\Http\Controllers\Users\JurnalController;
 
 // Rute untuk halaman publik
 Route::get('/', [BlogsController::class, 'index'])->name('home');
@@ -18,6 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Profil Dosen
+    Route::patch('/profile/dosen', [ProfileController::class, 'updateDosenProfile'])->name('profile.update.dosen');
+
+// Jurnal routes
+    Route::resource('jurnals', JurnalController::class);
 });
 
 // Grup untuk semua halaman Admin
