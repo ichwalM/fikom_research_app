@@ -27,4 +27,8 @@ class DosenProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function statistic()
+    {
+        return $this->hasOne(DosenStatistic::class);
+    }
 }

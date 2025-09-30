@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\public\BlogsController;
 use App\Http\Controllers\Users\JurnalController;
 
@@ -10,9 +11,13 @@ use App\Http\Controllers\Users\JurnalController;
 Route::get('/', [BlogsController::class, 'index'])->name('home');
 
 // Rute dasbor default dari Breeze
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Rute untuk dasbor khusus
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
 // Rute untuk mengelola profil pengguna (bawaan Breeze)
 Route::middleware('auth')->group(function () {
@@ -21,9 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // Profil Dosen
     Route::patch('/profile/dosen', [ProfileController::class, 'updateDosenProfile'])->name('profile.update.dosen');
-
 // Jurnal routes
     Route::resource('jurnals', JurnalController::class);
+// untuk statistic google scholar dan sinta di update dari command
+    Route::patch('/profile/statistic', [ProfileController::class, 'updateStatistic'])->name('profile.update.statistic');
 });
 
 // Grup untuk semua halaman Admin

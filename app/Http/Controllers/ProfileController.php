@@ -44,30 +44,53 @@ class ProfileController extends Controller
             'foto_profil' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
-        // 1. Siapkan semua data dari form ke dalam satu array.
         $profileData = $request->only([
             'nidn_nip', 'nomor_telepon', 'tempat_lahir', 'tanggal_lahir', 
             'alamat_domisili', 'npwp', 'nama_wajib_pajak', 'sinta_id', 'google_scholar_id'
         ]);
 
-        // 2. Cek jika ada file foto baru yang diunggah.
         if ($request->hasFile('foto_profil')) {
-            // Hapus foto lama jika ada.
             if ($user->dosenProfile?->foto_profil) {
                 Storage::disk('public')->delete($user->dosenProfile->foto_profil);
             }
-            // Simpan foto baru dan tambahkan path-nya ke array data.
             $path = $request->file('foto_profil')->store('avatars', 'public');
             $profileData['foto_profil'] = $path;
         }
 
-        // 3. Jalankan updateOrCreate dengan format yang benar (2 argumen).
         $user->dosenProfile()->updateOrCreate(
-            ['user_id' => $user->id], // Argumen 1: Kondisi pencarian
-            $profileData               // Argumen 2: Semua data untuk disimpan/diupdate
+            ['user_id' => $user->id],
+            $profileData
         );
 
         return Redirect::route('profile.edit')->with('status', 'dosen-profile-updated');
+    }
+
+    // untuk statistic google scholar dan sinta di update dari command
+    public function updateStatistic(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        // Pastikan dosen sudah punya profil sebelum menyimpan statistik
+        if (!$user->dosenProfile) {
+            return Redirect::route('profile.edit')->with('error', 'Harap lengkapi profil dosen terlebih dahulu.');
+        }
+
+        $request->validate([
+            'total_sitasi' => ['nullable', 'integer', 'min:0'],
+            'h_index' => ['nullable', 'integer', 'min:0'],
+            'i10_index' => ['nullable', 'integer', 'min:0'],
+        ]);
+
+        $user->dosenProfile->statistic()->updateOrCreate(
+            ['dosen_profile_id' => $user->dosenProfile->id],
+            [
+                'total_sitasi' => $request->total_sitasi,
+                'h_index' => $request->h_index,
+                'i10_index' => $request->i10_index,
+            ]
+        );
+
+        return Redirect::route('profile.edit')->with('status', 'statistic-updated');
     }
 
     /**

@@ -35,10 +35,44 @@
                     </div>
                 </form>
             </div>
+            {{-- Bagian Kanan Statistic Scholar Account --}}
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <header>
+                    <h2 class="text-lg font-medium text-gray-900">Statistik Google Scholar</h2>
+                    <p class="mt-1 text-sm text-gray-600">Isi data statistik Anda dari Google Scholar secara manual.</p>
+                </header>
+
+                <form method="post" action="{{ route('profile.update.statistic') }}" class="mt-6 space-y-6">
+                    @csrf
+                    @method('patch')
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="total_sitasi" class="block font-medium text-sm text-gray-700">Total Sitasi</label>
+                            <input id="total_sitasi" name="total_sitasi" type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('total_sitasi', $user->dosenProfile?->statistic?->total_sitasi) }}">
+                        </div>
+                        <div>
+                            <label for="h_index" class="block font-medium text-sm text-gray-700">H-Index</label>
+                            <input id="h_index" name="h_index" type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('h_index', $user->dosenProfile?->statistic?->h_index) }}">
+                        </div>
+                        <div>
+                            <label for="i10_index" class="block font-medium text-sm text-gray-700">i10-Index</label>
+                            <input id="i10_index" name="i10_index" type="number" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="{{ old('i10_index', $user->dosenProfile?->statistic?->i10_index) }}">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700">Simpan Statistik</button>
+                        @if (session('status') === 'statistic-updated')
+                            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600">Tersimpan.</p>
+                        @endif
+                    </div>
+                </form>
+            </div>
 
             {{-- Bagian Update Password --}}
             <div class="bg-white p-6 rounded-lg shadow-md">
-                 <header>
+                <header>
                     <h2 class="text-lg font-medium text-gray-900">Update Password</h2>
                 </header>
                 <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">

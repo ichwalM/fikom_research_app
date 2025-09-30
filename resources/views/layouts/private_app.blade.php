@@ -177,5 +177,6 @@
             </div>
         </div>
         <script src={{ asset('js/private/main.js') }}></script>
+        @stack('scripts')
     </body>
 </html>

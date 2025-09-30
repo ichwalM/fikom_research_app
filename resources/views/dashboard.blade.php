@@ -33,11 +33,13 @@
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-green-500 to-green-700 text-white p-4 rounded-lg">
+                <div class="p-4 rounded-lg">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h3 class="text-lg font-semibold">Layanan</h3>
-                            <p class="text-sm opacity-90">BKD, PAK, Serdos</p>
+                            <h3 class="text-lg font-semibold">Statistic Publikasi</h3>
+                            <div class=" p-6 rounded-lg shadow-md">
+                                <canvas id="publicationsChart"></canvas>
+                            </div>
                         </div>
                         <i class="fas fa-clipboard-check text-2xl opacity-75"></i>
                     </div>
@@ -45,4 +47,36 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('publicationsChart');
+            
+            // Ambil data dari controller yang dikirim via Blade
+            const labels = @json($labels);
+            const data = @json($data);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Publikasi',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    @endpush
 @endsection
