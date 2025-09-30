@@ -49,7 +49,7 @@ Tujuan akhir dari aplikasi ini adalah untuk menyajikan data yang terkumpul di ha
 
 1.  **Clone repository ini:**
     ```bash
-    git clone [https://github.com/ichwalM/fikom_research_app.git]
+    git clone https://github.com/ichwalM/fikom_research_app.git
     cd riset_fikom_app
     ```
 
