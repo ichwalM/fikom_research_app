@@ -22,3 +22,18 @@
 .custom-scroll::-webkit-scrollbar-track { background: #333333; }
 .custom-scroll::-webkit-scrollbar-thumb { background: #555555; border-radius: 3px; }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: #777777; }
+
+.trash-badge {
+    position: absolute;
+    top: -8px; /* Mengatur posisi badge di atas tombol */
+    right: -8px; /* Mengatur posisi badge di kanan tombol */
+    background-color: red; /* Warna latar badge */
+    color: white; /* Warna teks badge */
+    font-size: 12px; /* Ukuran font kecil untuk badge */
+    font-weight: bold; /* Membuat teks tebal */
+    line-height: 1; /* Mengatur tinggi baris agar badge kompak */
+    padding: 2px 6px; /* Padding untuk ukuran badge */
+    border-radius: 50%; /* Membuat badge berbentuk lingkaran */
+    border: 1px solid white; /* Border putih untuk kontras */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Efek bayangan untuk dimensi */
+}

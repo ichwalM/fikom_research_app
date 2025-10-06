@@ -18,8 +18,11 @@
                         <a href="{{ route('admin.users.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
                             Tambah Pengguna
                         </a>
-                        <a href="{{ route('admin.users.trash') }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600">
-                            Tong Sampah ({{ \App\Models\User::onlyTrashed()->count() }})
+                        <a href="{{ route('admin.users.trash') }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 relative">
+                            Tong Sampah
+                            @if (\App\Models\User::onlyTrashed()->count() > 0)
+                                <span class="trash-badge">{{ \App\Models\User::onlyTrashed()->count() }}</span>
+                            @endif
                         </a>
                     </div>
 

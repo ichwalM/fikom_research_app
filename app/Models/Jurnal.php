@@ -15,6 +15,7 @@ class Jurnal extends Model
         'nomor',
         'halaman',
         'url_publikasi',
+        'file_path',
     ];
     public function user()
     {

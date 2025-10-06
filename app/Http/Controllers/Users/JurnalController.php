@@ -7,6 +7,8 @@ use App\Models\Jurnal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Models\User;
 
 
@@ -20,12 +22,12 @@ class JurnalController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
+
         if ($user->role->name === 'Admin Fakultas') {
-            // Jika admin, ambil semua jurnal beserta data penulisnya
+
             $jurnals = Jurnal::with('user')->latest()->get();
         } else {
-            // Jika bukan admin (dosen), hanya ambil jurnal milik sendiri
+
             $jurnals = $user->jurnals()->latest()->get();
         }
 
@@ -45,28 +47,31 @@ class JurnalController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'judul_artikel' => 'required|string|max:255',
             'nama_jurnal' => 'required|string|max:255',
             'tahun_terbit' => 'required|digits:4',
-            'volume' => 'nullable|string|max:50',
-            'nomor' => 'nullable|string|max:50',
-            'halaman' => 'nullable|string|max:50',
             'url_publikasi' => 'nullable|url',
+            'file_path' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
         ]);
+        if ($request->hasFile('file_path')) {
+        $file = $request->file('file_path');
+        $extension = $file->getClientOriginalExtension();
+        $slug = Str::slug($request->judul_artikel);
+        $fileName = $slug . '-' . time() . '.' . $extension;
 
-        $request->user()->jurnals()->create($request->all());
-
+        // 3. Simpan file dengan nama baru menggunakan storeAs()
+        $path = $file->storeAs('jurnals', $fileName, 'public');
+        $validatedData['file_path'] = $path;
+    }
+        Auth::user()->jurnals()->create($validatedData);
         return redirect()->route('jurnals.index')->with('success', 'Data jurnal berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Jurnal $jurnal)
-    {
-        //
-    }
+    public function show(Jurnal $jurnal) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -74,7 +79,6 @@ class JurnalController extends Controller
     public function edit(Jurnal $jurnal)
     {
         $this->authorize('update', $jurnal);
-
         return view('users.jurnals.edit', compact('jurnal'));
     }
 
@@ -85,32 +89,34 @@ class JurnalController extends Controller
     {
         $this->authorize('update', $jurnal);
 
-        $request->validate([
+        $validatedData = $request->validate([
             'judul_artikel' => 'required|string|max:255',
             'nama_jurnal' => 'required|string|max:255',
             'tahun_terbit' => 'required|digits:4',
-            'volume' => 'nullable|string|max:50',
-            'nomor' => 'nullable|string|max:50',
-            'halaman' => 'nullable|string|max:50',
             'url_publikasi' => 'nullable|url',
+            'file_path' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
         ]);
-
-        $jurnal->update($request->all());
-
+        if ($request->hasFile('file_path')) {
+            if ($jurnal->file_path) {
+                Storage::disk('public')->delete($jurnal->file_path);
+            }
+            $file = $request->file('file_path');
+            $extension = $file->getClientOriginalExtension();
+            $slug = Str::slug($request->judul_artikel);
+            $fileName = $slug . '-' . time() . '.' . $extension;
+            $path = $file->storeAs('jurnals', $fileName, 'public');
+            $validatedData['file_path'] = $path;
+        }
+        $jurnal->update($validatedData);
         return redirect()->route('jurnals.index')->with('success', 'Data jurnal berhasil diperbarui.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Jurnal $jurnal)
     {
         $this->authorize('delete', $jurnal);
-        
-        // Kita belum menerapkan soft delete pada Jurnal, jadi ini akan hard delete.
-        // Jika ingin soft delete, tambahkan trait SoftDeletes ke model Jurnal.
         $jurnal->delete();
-
         return redirect()->route('jurnals.index')->with('success', 'Data jurnal berhasil dihapus.');
     }
 }

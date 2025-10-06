@@ -5,10 +5,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\public\BlogsController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Users\JurnalController;
 
 // Rute untuk halaman publik
-Route::get('/', [BlogsController::class, 'index'])->name('home');
+Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/dosen/{user}', [PublicController::class, 'show'])->name('dosen.show');
 
 // Rute dasbor default dari Breeze
 // Route::get('/dashboard', function () {

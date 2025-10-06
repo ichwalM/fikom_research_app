@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nomor')->nullable();
             $table->string('halaman')->nullable();
             $table->string('url_publikasi')->nullable();
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }

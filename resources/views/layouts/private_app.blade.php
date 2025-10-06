@@ -51,11 +51,11 @@
                         </button>
                         
                         <div class="ml-6 mt-1 space-y-1 hidden" id="profile-submenu">
-                            <a href={{route('profile.edit')}} class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Data pribadi</a>
-                            <a href="#" class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Inpassing</a>
-                            <a href="#" class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Jabatan fungsional</a>
-                            <a href="#" class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Kepangkatan</a>
-                            <a href="#" class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Penempatan</a>
+                            <a href={{route('profile.edit')}} class="block px-3 py-2 text-sm hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Data pribadi</a>
+                            <a href="#" class="block px-3 py-2 text-sm hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Inpassing</a>
+                            <a href="#" class="block px-3 py-2 text-sm hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Jabatan fungsional</a>
+                            <a href="#" class="block px-3 py-2 text-sm hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Kepangkatan</a>
+                            <a href="#" class="block px-3 py-2 text-sm hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Penempatan</a>
                         </div>
                     </div>
 

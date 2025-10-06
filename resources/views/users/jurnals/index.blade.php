@@ -31,7 +31,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nama Jurnal</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tahun</th>
                                 @if(Auth::user()->role->name === 'Admin Fakultas')
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Penulis</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
                                 @endif
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
                             </tr>
@@ -46,6 +46,11 @@
                                     <td class="px-6 py-4">{{ $jurnal->user->name }}</td>
                                 @endif
                                 <td class="px-6 py-4 text-sm font-medium">
+                                    {{-- @if($jurnal->file_path) --}}
+                                        <a href="{{ asset('storage/' . $jurnal->file_path) }}" target="_blank" class="text-green-600 hover:text-green-900" download>
+                                            Unduh
+                                        </a>
+                                    {{-- @endif --}}
                                     <a href="{{ route('jurnals.edit', $jurnal) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     <form class="inline-block" action="{{ route('jurnals.destroy', $jurnal) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jurnal ini?');">
                                         @csrf

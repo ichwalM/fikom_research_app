@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Fikom Research - Pusat Penelitian Fakultas Ilmu Komputer</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/public_index.css') }}">
@@ -88,5 +89,6 @@
     <script src="{{asset('js/public_index.js')}}"></script>
 
     @yield('content')
+    @include('public.components.footerSection')
 </body>
 </html>
