@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurnal;
+use App\Models\Publikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         // Ambil data jumlah jurnal per tahun
-        $publicationsPerYear = Jurnal::select(DB::raw('tahun_terbit as year'), DB::raw('count(*) as count'))
+        $publicationsPerYear = Publikasi::select(DB::raw('tahun as year'), DB::raw('count(*) as count'))
             ->groupBy('year')
             ->orderBy('year', 'asc')
             ->get();

@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\public\BlogsController;
 use App\Http\Controllers\PublicController;
-use App\Http\Controllers\Users\JurnalController;
+use App\Http\Controllers\Users\PublikasiController;
 
 // Rute untuk halaman publik
 Route::get('/', [PublicController::class, 'index'])->name('home');
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 // Profil Dosen
     Route::patch('/profile/dosen', [ProfileController::class, 'updateDosenProfile'])->name('profile.update.dosen');
 // Jurnal routes
-    Route::resource('jurnals', JurnalController::class);
+    Route::resource('publikasi', PublikasiController::class);
 // untuk statistic google scholar dan sinta di update dari command
     Route::patch('/profile/statistic', [ProfileController::class, 'updateStatistic'])->name('profile.update.statistic');
 });

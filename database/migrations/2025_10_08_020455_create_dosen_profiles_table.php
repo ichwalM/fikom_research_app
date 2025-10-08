@@ -14,16 +14,19 @@ return new class extends Migration
         Schema::create('dosen_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('program_studi_id')->nullable()->constrained()->onDelete('set null');
             $table->string('nidn_nip')->unique()->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('agama')->nullable();
             $table->string('nomor_telepon')->nullable();
             $table->text('alamat_domisili')->nullable();
-            $table->string('npwp')->nullable(); 
-            $table->string('nama_wajib_pajak')->nullable(); 
-            $table->string('sinta_id')->nullable(); 
-            $table->string('google_scholar_id')->nullable();
             $table->string('foto_profil')->nullable();
+            $table->string('sinta_id')->nullable();
+            $table->string('google_scholar_id')->nullable();
+            $table->string('npwp')->nullable();
+            $table->string('nama_wajib_pajak')->nullable();
             $table->timestamps();
         });
     }

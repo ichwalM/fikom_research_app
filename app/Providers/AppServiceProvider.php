@@ -3,14 +3,15 @@
 namespace App\Providers;
 
 use App\Models\Jurnal;
+use App\Models\Publikasi;
 use App\Policies\JurnalPolicy;
+use App\Policies\PublikasiPolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Jurnal::class => JurnalPolicy::class, // <-- TAMBAHKAN BARIS INI
+        Publikasi::class => PublikasiPolicy::class,
     ];
 
     /**

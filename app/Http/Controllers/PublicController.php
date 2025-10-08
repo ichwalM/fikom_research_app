@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurnal;
+use App\Models\Publikasi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class PublicController extends Controller
 {
     public function index()
     {
-        $jumlahPublikasi = Jurnal::count();
+        $jumlahPublikasi = Publikasi::count();
         $jumlahPeneliti = User::whereHas('role', function ($query) {
             $query->where('name', 'Dosen');
         })->count();

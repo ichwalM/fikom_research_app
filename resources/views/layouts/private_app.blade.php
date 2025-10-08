@@ -97,7 +97,7 @@
 
                     <div class="space-y-1">
                         <div class="px-4 py-1">
-                            <a href="{{ route('jurnals.index') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200">
+                            <a href="{{ route('publikasi.index') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200">
                                 <i class="fas fa-flask text-lg w-5 text-center"></i>
                                 <span class="flex-1 text-left">Pelaks. penelitian</span>
                             </a>

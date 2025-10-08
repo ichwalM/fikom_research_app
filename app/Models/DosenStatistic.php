@@ -18,6 +18,9 @@ class DosenStatistic extends Model
         'i10_index',
     ];
 
+    /**
+     * Relasi ke DosenProfile (pemilik data statistik).
+     */
     public function dosenProfile()
     {
         return $this->belongsTo(DosenProfile::class);

@@ -11,22 +11,44 @@ class DosenProfile extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'program_studi_id',
         'nidn_nip',
         'tempat_lahir',
         'tanggal_lahir',
+        'jenis_kelamin',
+        'agama',
         'nomor_telepon',
         'alamat_domisili',
-        'npwp', 
-        'nama_wajib_pajak', 
+        'foto_profil',
         'sinta_id',
         'google_scholar_id',
-        'foto_profil',
+        'npwp',
+        'nama_wajib_pajak',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+    /**
+     * Relasi ke Program Studi.
+     */
+    public function programStudi()
+    {
+        return $this->belongsTo(ProgramStudi::class);
+    }
+
+    /**
+     * Relasi ke data Kepegawaian.
+     */
+    public function kepegawaian()
+    {
+        return $this->hasOne(Kepegawaian::class);
+    }
+
+    /**
+     * Relasi ke data Statistik.
+     */
     public function statistic()
     {
         return $this->hasOne(DosenStatistic::class);

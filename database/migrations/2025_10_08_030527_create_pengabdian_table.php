@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jurnals', function (Blueprint $table) {
+        Schema::create('pengabdian', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('judul_artikel');
-            $table->string('nama_jurnal');
-            $table->year('tahun_terbit');
-            $table->string('volume')->nullable();
-            $table->string('nomor')->nullable();
-            $table->string('halaman')->nullable();
-            $table->string('url_publikasi')->nullable();
-            $table->string('file_path')->nullable();
+            $table->string('judul_kegiatan');
+            $table->string('sumber_dana')->nullable();
+            $table->decimal('jumlah_dana', 15, 2)->nullable();
+            $table->year('tahun');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jurnals');
+        Schema::dropIfExists('pengabdian');
     }
 };
