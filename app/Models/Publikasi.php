@@ -25,6 +25,8 @@ class Publikasi extends Model
         'jumlah_sitasi',
         'keterlibatan_mahasiswa',
         'nama_mahasiswa',
+        'kesesuaian_roadmap',
+        'kesesuaian_topik_infokom',
     ];
 
     public function user(){

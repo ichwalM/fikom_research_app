@@ -23,8 +23,10 @@ return new class extends Migration
             $table->string('kontribusi')->nullable(); // Contoh: 'First Author', 'Contributor'
             $table->string('pemeringkatan')->nullable(); // Contoh: 'Scopus Q1', 'Sinta 2'
             $table->integer('jumlah_sitasi')->nullable();
-            $table->boolean('keterlibatan_mahasiswa')->nullable();
+            $table->boolean('keterlibatan_mahasiswa')->nullable()->default(false);
             $table->string('nama_mahasiswa')->nullable();
+            $table->boolean('kesesuaian_roadmap')->default(false);
+            $table->boolean('kesesuaian_topik_infokom')->default(false);
             $table->timestamps();
         });
     }

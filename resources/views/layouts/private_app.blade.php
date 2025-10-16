@@ -42,6 +42,7 @@
                 </div>
 
                 <nav class="mt-2 pb-4">
+
                     
                     <div class="px-4 py-1">
                         <button class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="toggleSubmenu('profile')">
@@ -59,6 +60,20 @@
                         </div>
                     </div>
 
+                    {{-- Publikasi Dropdown --}}
+                    <div class="px-4 py-1">
+                        <button class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="toggleSubmenu('pendidikan')">
+                            <i class="fas fa-flask text-lg w-5 text-center"></i>
+                            <span class="flex-1 text-left">Publikasi & Penelitian</span>
+                            <i class="fas fa-chevron-down text-sm transition-transform duration-200" id="pendidikan-arrow"></i>
+                        </button>
+                        
+                        <div class="ml-6 mt-1 space-y-1 hidden" id="pendidikan-submenu">
+                            <a href={{route('publikasi.index')}} class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Publikasi</a>
+                            <a href={{route('penelitian.index')}} class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Penelitian</a>
+                        </div>
+                    </div>
+
                     @if (Auth::user()->role->name === 'Admin Fakultas')
                         <div class="px-4 py-1">
                             <a href="{{ route('admin.users.index') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200">
@@ -66,7 +81,14 @@
                                 <span class="flex-1 ms-3 whitespace-nowrap">Users Management</span>
                             </a>
                         </div>
+                        <div class="px-4 py-1">
+                            <a href="{{ route('admin.skema-penelitian.index') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200 {{ request()->routeIs('admin.skema-penelitian.*') ? 'bg-gray-700' : '' }}">
+                                <i class="fas fa-sitemap text-lg w-5 text-center"></i>
+                                <span class="flex-1 text-left">Master Skema</span>
+                            </a>
+                        </div>
                     @endif
+                    
 
                     <div class="px-4 py-1">
                         <a href="#" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200">
@@ -82,26 +104,7 @@
                         </a>
                     </div>
 
-                    <div class="px-4 py-1">
-                        <button class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="toggleSubmenu('pendidikan')">
-                            <i class="fas fa-book text-lg w-5 text-center"></i>
-                            <span class="flex-1 text-left">Pelaks. pendidikan</span>
-                            <i class="fas fa-chevron-down text-sm transition-transform duration-200" id="pendidikan-arrow"></i>
-                        </button>
-                        
-                        <div class="ml-6 mt-1 space-y-1 hidden" id="pendidikan-submenu">
-                            <a href="#" class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Data Mata Kuliah</a>
-                            <a href="#" class="block px-3 py-2 text-sm text-blue-200 hover:text-white hover:bg-blue-700 rounded transition-colors duration-200">Bimbingan</a>
-                            </div>
-                    </div>
-
                     <div class="space-y-1">
-                        <div class="px-4 py-1">
-                            <a href="{{ route('publikasi.index') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200">
-                                <i class="fas fa-flask text-lg w-5 text-center"></i>
-                                <span class="flex-1 text-left">Pelaks. penelitian</span>
-                            </a>
-                        </div>
                         <div class="px-4 py-1">
                             <a href="#" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200">
                                 <i class="fas fa-hands-helping text-lg w-5 text-center"></i>

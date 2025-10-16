@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Validation\Rule;
 
 class PublikasiController extends Controller
 {
@@ -32,19 +33,19 @@ class PublikasiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'judul' => 'required|string|max:255',
+            'judul' => ['required', 'string', 'max:255', Rule::unique('publikasi')->where('user_id', Auth::id())],
             'nama_publikasi' => 'required|string|max:255',
             'tahun' => 'required|digits:4',
             'jenis' => 'required|in:Internasional,Nasional',
             'kontribusi' => 'nullable|string|max:255',
             'pemeringkatan' => 'nullable|string|max:255',
             'jumlah_sitasi' => 'nullable|integer',
-            'keterlibatan_mahasiswa' => 'nullable|boolean',
             'nama_mahasiswa' => 'nullable|string|max:255',
             'url_doi' => 'nullable|url',
             'file_path' => 'nullable|file|mimes:pdf|max:5120',
         ]);
 
+        // Menangani unggahan file (jika ada)
         if ($request->hasFile('file_path')) {
             $file = $request->file('file_path');
             $extension = $file->getClientOriginalExtension();
@@ -54,7 +55,13 @@ class PublikasiController extends Controller
             $validatedData['file_path'] = $path;
         }
 
+        // Menangani semua checkbox secara manual
+        $validatedData['keterlibatan_mahasiswa'] = $request->has('keterlibatan_mahasiswa');
+        $validatedData['kesesuaian_roadmap'] = $request->has('kesesuaian_roadmap');
+        $validatedData['kesesuaian_topik_infokom'] = $request->has('kesesuaian_topik_infokom');
+
         Auth::user()->publikasi()->create($validatedData);
+        
         return redirect()->route('publikasi.index')->with('success', 'Data publikasi berhasil ditambahkan.');
     }
 
@@ -69,14 +76,13 @@ class PublikasiController extends Controller
         $this->authorize('update', $publikasi);
 
         $validatedData = $request->validate([
-            'judul' => 'required|string|max:255',
+            'judul' => ['required', 'string', 'max:255', Rule::unique('publikasi')->ignore($publikasi->id)->where('user_id', Auth::id())],
             'nama_publikasi' => 'required|string|max:255',
             'tahun' => 'required|digits:4',
             'jenis' => 'required|in:Internasional,Nasional',
             'kontribusi' => 'nullable|string|max:255',
             'pemeringkatan' => 'nullable|string|max:255',
             'jumlah_sitasi' => 'nullable|integer',
-            'keterlibatan_mahasiswa' => $request->has('keterlibatan_mahasiswa') ? 'required|string|max:255' : 'nullable',
             'nama_mahasiswa' => 'nullable|string|max:255',
             'url_doi' => 'nullable|url',
             'file_path' => 'nullable|file|mimes:pdf|max:5120',
@@ -96,6 +102,8 @@ class PublikasiController extends Controller
         
         // Atasi checkbox
         $validatedData['keterlibatan_mahasiswa'] = $request->has('keterlibatan_mahasiswa');
+        $validatedData['kesesuaian_roadmap'] = $request->has('kesesuaian_roadmap');
+        $validatedData['kesesuaian_topik_infokom'] = $request->has('kesesuaian_topik_infokom');
 
         $publikasi->update($validatedData);
         return redirect()->route('publikasi.index')->with('success', 'Data publikasi berhasil diperbarui.');

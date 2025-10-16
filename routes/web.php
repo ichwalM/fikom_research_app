@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\SkemaPenelitianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\public\BlogsController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Users\PenelitianController;
 use App\Http\Controllers\Users\PublikasiController;
 
 // Rute untuk halaman publik
@@ -28,8 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // Profil Dosen
     Route::patch('/profile/dosen', [ProfileController::class, 'updateDosenProfile'])->name('profile.update.dosen');
-// Jurnal routes
+// publikasi routes
     Route::resource('publikasi', PublikasiController::class);
+    // penelitian routes
+    Route::resource('penelitian', PenelitianController::class);
 // untuk statistic google scholar dan sinta di update dari command
     Route::patch('/profile/statistic', [ProfileController::class, 'updateStatistic'])->name('profile.update.statistic');
 });
@@ -42,6 +46,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('users/{user}/restore', [UserController::class, 'restore'])->name('users.restore')->withTrashed();
     Route::delete('users/{user}/force-delete', [UserController::class, 'forceDelete'])->name('users.forceDelete')->withTrashed();
     Route::resource('users', UserController::class);
+    // Rute untuk manajemen skema penelitian
+    Route::resource('skema-penelitian', SkemaPenelitianController::class);
 
 }); 
 
