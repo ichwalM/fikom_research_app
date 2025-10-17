@@ -53,6 +53,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('laporan/penelitian', [LaporanController::class, 'penelitian'])->name('laporan.penelitian');
     // Rute Laporan Publikasi
     Route::get('laporan/publikasi', [LaporanController::class, 'publikasi'])->name('laporan.publikasi');
+    // Rute export excel
+    Route::get('laporan/penelitian/export', [LaporanController::class, 'exportPenelitian'])->name('laporan.penelitian.export');
 }); 
 
 // File rute autentikasi bawaan Breeze
