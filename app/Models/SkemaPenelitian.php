@@ -12,7 +12,9 @@ class SkemaPenelitian extends Model
 
     protected $fillable = ['nama_skema'];
     
-    public function penelitian(){
-        return $this->hasMany(Penelitian::class);
+    public function penelitian()
+    {
+        return $this->hasMany(Penelitian::class, 'skema_penelitian_id');
     }
+
 }

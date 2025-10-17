@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\SkemaPenelitianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -48,7 +49,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('users', UserController::class);
     // Rute untuk manajemen skema penelitian
     Route::resource('skema-penelitian', SkemaPenelitianController::class);
-
+    // Rute Laporan Penelitian
+    Route::get('laporan/penelitian', [LaporanController::class, 'penelitian'])->name('laporan.penelitian');
+    // Rute Laporan Publikasi
+    Route::get('laporan/publikasi', [LaporanController::class, 'publikasi'])->name('laporan.publikasi');
 }); 
 
 // File rute autentikasi bawaan Breeze

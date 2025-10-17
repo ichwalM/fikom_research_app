@@ -22,7 +22,6 @@ class Penelitian extends Model
         'nama_mahasiswa',
         'kesesuaian_roadmap',
         'kesesuaian_topik_infokom',
-        'kesesuaian_topik_infokom',
         'mendapatkan_hki',
         'link_kontrak_penelitian',
         'matakuliah',
@@ -36,6 +35,6 @@ class Penelitian extends Model
     }
     public function skemaPenelitian()
     {
-        return $this->belongsTo(SkemaPenelitian::class, 'skema_penelitian_id');
+        return $this->belongsTo(\App\Models\SkemaPenelitian::class, 'skema_penelitian_id');
     }
 }

@@ -87,6 +87,18 @@
                                 <span class="flex-1 text-left">Master Skema</span>
                             </a>
                         </div>
+                        <div class="px-4 py-1">
+                            <a href="{{ route('admin.laporan.penelitian') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200 {{ request()->routeIs('admin.laporan.penelitian') ? 'bg-gray-700' : '' }}">
+                                <i class="fas fa-file-alt text-lg w-5 text-center"></i>
+                                <span class="flex-1 text-left">Laporan Penelitian</span>
+                            </a>
+                        </div>
+                        <div class="px-4 py-1">
+                            <a href="{{ route('admin.laporan.publikasi') }}" class="menu-button w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200 {{ request()->routeIs('admin.laporan.publikasi') ? 'bg-gray-700' : '' }}">
+                                <i class="fas fa-book-reader text-lg w-5 text-center"></i>
+                                <span class="flex-1 text-left">Laporan Publikasi</span>
+                            </a>
+                        </div>
                     @endif
                     
 

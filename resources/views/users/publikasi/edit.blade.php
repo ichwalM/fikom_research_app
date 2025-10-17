@@ -82,22 +82,6 @@
             </div>
         </div>
         
-        {{-- Input Tambahan --}}
-        <div class="border-t pt-4 space-y-4">
-             <div>
-                <label for="link_kontrak_penelitian" class="block font-medium text-sm text-gray-700">Link Kontrak Penelitian</label>
-                <input id="link_kontrak_penelitian" name="link_kontrak_penelitian" type="url" value="{{ old('link_kontrak_penelitian', $publikasi->link_kontrak_penelitian) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-            </div>
-            <div>
-                <label for="matakuliah" class="block font-medium text-sm text-gray-700">Dihasilkan untuk Matakuliah</label>
-                <input id="matakuliah" name="matakuliah" type="text" value="{{ old('matakuliah', $publikasi->matakuliah) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-            </div>
-            <div>
-                <label for="keterangan" class="block font-medium text-sm text-gray-700">Keterangan</label>
-                <textarea id="keterangan" name="keterangan" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">{{ old('keterangan', $publikasi->keterangan) }}</textarea>
-            </div>
-        </div>
-
         {{-- URL & File --}}
         <div class="border-t pt-4 space-y-4">
             <div>
