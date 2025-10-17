@@ -35,9 +35,12 @@
             </div>
 
             {{-- Tombol Filter --}}
-            <div>
+            <div class="flex items-center space-x-2">
                 <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border rounded-md font-semibold text-xs text-white uppercase hover:bg-gray-700">Filter</button>
                 <a href="{{ route('admin.laporan.publikasi') }}" class="ml-2 text-sm text-gray-600 hover:underline">Reset</a>
+                <a href="{{ route('admin.laporan.publikasi.export', request()->query()) }}" class="inline-flex items-center px-4 py-2 bg-green-600 border rounded-md font-semibold text-xs text-white uppercase hover:bg-green-700">
+                    Export ke Excel
+                </a>
             </div>
         </div>
     </form>

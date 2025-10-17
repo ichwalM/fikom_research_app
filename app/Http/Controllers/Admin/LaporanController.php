@@ -9,6 +9,7 @@ use App\Models\Publikasi;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel; // <-- Import
 use App\Exports\PenelitianExport;
+use App\Exports\PublikasiExport;
 
 class LaporanController extends Controller
 {
@@ -53,10 +54,18 @@ class LaporanController extends Controller
     {
         $skema_id = $request->query('skema_id');
         $tahun = $request->query('tahun');
-
-        // Tentukan nama file
         $fileName = 'laporan-penelitian-' . date('Y-m-d') . '.xlsx';
 
         return Excel::download(new PenelitianExport($skema_id, $tahun), $fileName);
+    }
+    
+    // Export Laporan Publikasi ke Excel
+    public function exportPublikasi(Request $request)
+    {
+        $jenis = $request->query('jenis');
+        $tahun = $request->query('tahun');
+        $fileName = 'laporan-publikasi-' . date('Y-m-d') . '.xlsx';
+
+        return Excel::download(new PublikasiExport($jenis, $tahun), $fileName);
     }
 }
